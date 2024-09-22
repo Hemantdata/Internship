@@ -1,0 +1,310 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[6]:
+
+
+get_ipython().system('pip install selenium')
+
+
+# In[9]:
+
+
+import selenium
+import pandas as pd
+from selenium import webdriver
+import warnings
+warnings.filterwarnings('ignore')
+from selenium.webdriver.common.by import By
+import time
+
+
+# In[8]:
+
+
+driver = webdriver.Chrome()
+
+
+# In[9]:
+
+
+driver.get("https://www.naukri.com/")
+
+
+# In[11]:
+
+
+designation=driver.find_element(By.CLASS_NAME,"suggestor-input ")
+designation.send_keys('Data Scientist')
+
+
+# In[12]:
+
+
+location=driver.find_element(By.XPATH,"/html/body/div[1]/div[7]/div/div/div[5]/div/div/div/div[1]/div/input")
+location.send_keys('Bangalore')
+
+
+# In[21]:
+
+
+search=driver.find_element(By.CLASS_NAME,"nI-gNb-sb__icon-wrapper")
+search.click()
+
+
+# In[23]:
+
+
+job_title=[]
+job_location=[]
+company_name=[]
+experience_required=[]
+
+
+# In[28]:
+
+
+title_tags=driver.find_elements(By.XPATH,'//a[@class="title "]')
+for i in title_tags:
+    title=i.text
+    job_title.append(title)
+    
+
+location_tags=driver.find_elements(By.XPATH,'//span[@class="locWdth"]')
+for i in location_tags:
+    location=i.text
+    job_location.append(location)
+    
+    
+    
+company_tags=driver.find_elements(By.XPATH,'//div[@class="row2"]/span/a[1]')
+for i in company_tags:
+    company=i.text
+    company_name.append(company)
+                    
+    
+    
+    
+experience_tags=driver.find_elements(By.XPATH,'//span[@class="expwdth"]')
+for i in experience_tags:
+    exp=i.text
+    experience_required.append(exp)
+
+
+
+# In[44]:
+
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# Wait until the elements are loaded
+company_tags = WebDriverWait(driver, 10).until(
+    EC.presence_of_all_elements_located((By.XPATH,'//a[@class=comp-name"]'))
+    
+
+
+# In[42]:
+
+
+company_tags = driver.find_elements (By.XPATH),"/html/body/div/div/main/div[1]/div[2]/div[2]/div/div[1]/div/div[2]/span/a"[1]
+
+# Create a list to hold the company names
+company_names = []
+
+# Extract the text from each tag and append to the list
+for company_tag in company_tags:
+    company_names.append(company_tag.text)
+
+# Print the company names
+for company in company_names:
+    print(company)
+
+
+# In[ ]:
+
+
+html/body/div/div/main/div[1]/div[2]/div[2]/div/div[1]/div/div[2]/span/a[1]()
+
+
+# In[39]:
+
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# Wait for the elements to load
+company_tags = WebDriverWait(driver, 10).until(
+    EC.presence_of_all_elements_located((By.XPATH, '//a[@class="subTitle ellipsis fleft"]'))
+)
+
+
+# In[37]:
+
+
+print(len(job_title),len(job_location),len(company_name),len(experience_required))
+
+
+# In[30]:
+
+
+print(f"Length of job_title: {len(job_title)}")
+print(f"Length of job_location: {len(job_location)}")
+
+
+# In[19]:
+
+
+import pandas as pd
+if len(job_title) == len(job_location):
+    df = pd.DataFrame({'Title': job_title, 'Location': job_location})
+    print(df)
+else:
+    print("Error: job_title and job_location have different lengths.")
+
+
+# In[48]:
+
+
+import pandas as pd
+import numpy as np
+
+
+max_length = max(len(job_title), len(job_location))
+
+
+if len(job_title) < max_length:
+    job_title.extend([None] * (max_length - len(job_title)))
+
+
+if len(job_location) < max_length:
+    job_location.extend([None] * (max_length - len(job_location)))
+
+
+df = pd.DataFrame({'Title': job_title, 'Location': job_location})
+
+print(df)
+
+
+# In[49]:
+
+
+import pandas as pd
+
+
+min_length = min(len(job_title), len(job_location))
+
+
+job_title = job_title[:min_length]
+job_location = job_location[:min_length]
+
+
+df = pd.DataFrame({'Title': job_title, 'Location': job_location})
+
+print(df)
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[57]:
+
+
+url=driver.find_elements(By.XPATH,'//a[@class="title "]')
+url[0:4]
+
+
+# In[59]:
+
+
+for i in url[0:4]:
+    print(i.get_attribute('href'))
+
+
+# In[1]:
+
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+
+
+# In[4]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
